@@ -10,6 +10,9 @@ oauth2_scheme= OAuth2PasswordBearer(tokenUrl="login")
 
 app=FastAPI()
 
+from database import Base, engine
+Base.metadata.create_all(bind=engine)
+
 def get_current_user(token:str=Depends(oauth2_scheme),db:Session=Depends(get_db)):
     payload=verify_token(token)
     if payload is None:
