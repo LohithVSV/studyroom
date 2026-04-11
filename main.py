@@ -5,10 +5,18 @@ import models,schemas
 from auth import hash_password,verify_password
 from auth_jwt import create_access_token,verify_token
 from fastapi.security import OAuth2PasswordBearer,OAuth2PasswordRequestForm
+from fastapi.middleware.cors import CORSMiddleware
 
 oauth2_scheme= OAuth2PasswordBearer(tokenUrl="login")
 
 app=FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 from database import Base, engine
 Base.metadata.create_all(bind=engine)
