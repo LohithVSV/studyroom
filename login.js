@@ -1,0 +1,18 @@
+document.getElementById("loginform").addEventListener("submit",function(event){
+    event.preventDefault()
+    console.log("submitted")
+    let username = document.getElementById("username").value
+    let password = document.getElementById("password").value
+
+    fetch("https://studyroom-api-vcns.onrender.com/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: `username=${username}&password=${password}`
+})
+.then(res => res.json())
+.then(data => {
+    console.log(data)
+    localStorage.setItem("token", data.access_token)
+    window.location.href = "index.html"
+})
+})
