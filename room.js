@@ -38,3 +38,11 @@ document.getElementById("startBtn").addEventListener("click", function() {
 document.getElementById("leaveBtn").addEventListener("click", function() {
     window.location.href = "index.html"
 })
+
+fetch("https://studyroom-api-vcns.onrender.com/rooms/" + roomId + "/members")
+.then(res => res.json())
+.then(data => {
+    let count = data.member_count
+    let text = count === 1 ? "member" : "members"
+    document.getElementById("memberCount").innerText = "👥 " + count + " " + text
+})
