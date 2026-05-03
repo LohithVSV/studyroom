@@ -4,15 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign-Up</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Sign Up</h1>
-    <form id="signupform">
-        <input type="text" id="username" name="username" placeholder="Username" required><br><br>
-        <input type="email" id="email" name="email" placeholder="Email" required><br><br>
-        <input type="password" id="password" name="password" placeholder="Password" required><br><br>
-        <button type="submit" id="submit-btn">Submit</button>
-    </form>
+    <div class="auth-container">
+        <div class="auth-box">
+            <h1>Sign Up</h1>
+            <form id="signupform">
+                <input type="text" id="username" placeholder="Username" required><br><br>
+                <input type="email" id="email" placeholder="Email" required><br><br>
+                <input type="password" id="password" placeholder="Password" required><br><br>
+                <button type="submit" id="submit-btn">Submit</button>
+            </form>
+        </div>
+    </div>
     <script src="signup.js"></script>
+     <div class="tree" style="left: 5%; animation-delay: 0s;"></div>
+<div class="tree" style="left: 15%; animation-delay: 0.5s; height: 250px;"></div>
+<div class="tree" style="right: 5%; animation-delay: 1s;"></div>
+<div class="tree" style="right: 15%; animation-delay: 1.5s; height: 180px;"></div>
 </body>
 </html>

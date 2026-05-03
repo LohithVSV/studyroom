@@ -13,12 +13,14 @@ function joinRoom(roomId) {
     })
 }
 document.getElementById("browseroombtn").addEventListener("click",function(){
+    document.getElementById("browseroombtn").style.display = "none"
     document.getElementById("roomsSection").style.display = "block";
     fetch("https://studyroom-api-vcns.onrender.com/rooms")
     .then(function(response){
         return response.json()
     })
     .then(function(data){
+        document.getElementById("roomsContainer").innerHTML = ""
         for (let room of data) {
         let card = document.createElement("div")
         card.innerHTML = `
@@ -30,7 +32,6 @@ document.getElementById("browseroombtn").addEventListener("click",function(){
     }
     })
 })
-
 document.getElementById("createroombtn").addEventListener("click",function(){
     document.getElementById("createroommodal").style.display="block";
 })
@@ -50,5 +51,16 @@ document.getElementById("submitroombtn").addEventListener("click",function(){
     })
     })
 document.getElementById("closemodalbtn").addEventListener("click",function(){
-        document.getElementById("createroommodal").style.display = "none"
+    document.getElementById("createroommodal").style.display="none";
     })
+document.getElementById("searchInput").addEventListener("input", function() {
+    let searchText = this.value.toLowerCase()
+    let cards = document.querySelectorAll("#roomsContainer div")
+    for(let card of cards){
+        if (card.innerText.toLowerCase().includes(searchText)) {
+            card.style.display = "block"
+        } else {
+            card.style.display = "none"
+        }
+    }
+})

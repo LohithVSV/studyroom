@@ -4,10 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Study Room</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1 id="roomTitle">Loading...</h1>
-    <button id="leaveBtn">Leave Room</button>
+    <nav>
+        <h1 id="roomTitle">Loading...</h1>
+        <button id="leaveBtn">Leave Room</button>
+    </nav>
+
+    <main style="flex-direction: column; align-items: center; justify-content: center; min-height: 80vh;">
+        <div class="auth-box" style="text-align: center; max-width: 500px;">
+            <h2>set the timer to lock in</h2>
+            <input type="number" id="timeset" placeholder="minutes">
+            <h2 id="timerDisplay">00:00</h2>
+            <button id="startBtn">Start</button>
+        </div>
+    </main>
+
+    <div class="tree" style="left: 5%; animation-delay: 0s;"></div>
+    <div class="tree" style="left: 15%; animation-delay: 0.5s; height: 250px;"></div>
+    <div class="tree" style="right: 5%; animation-delay: 1s;"></div>
+    <div class="tree" style="right: 15%; animation-delay: 1.5s; height: 180px;"></div>
+
     <script src="room.js"></script>
 </body>
 </html>

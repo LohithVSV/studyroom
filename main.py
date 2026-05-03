@@ -74,6 +74,11 @@ def get_room(room_id:int,db: Session=Depends(get_db)):
         raise HTTPException(status_code=404,detail="Room not found")
     return room
 
+@app.get("/rooms/{room_id}/members")
+def get_room_members(room_id: int, db: Session = Depends(get_db)):
+    count = db.query(models.RoomMember).filter(models.RoomMember.room_id == room_id).count()
+    return {"room_id": room_id, "member_count": count}
+
 @app.post("/rooms/{room_id}/join",response_model=schemas.RoomMemberResponse)
 def join_room(room_id:int,current_user: models.User = Depends(get_current_user),db:Session=Depends(get_db)):
     room=db.query(models.StudyRoom).filter(models.StudyRoom.id==room_id).first()
