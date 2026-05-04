@@ -167,12 +167,9 @@ def create_note(room_id:int,note: schemas.NoteCreate,current_user: models.User =
     db.refresh(note)
     return note
 
-@app.get("/rooms/{room_id}/notes",response_model=schemas.NoteResponse)
-def get_note(room_id:int,current_user: models.User = Depends(get_current_user),db:Session=Depends(get_db)):
-    note=db.query(models.Notes).filter(
-        models.Notes.room_id==room_id,
-        models.Notes.user_id==current_user.id
-    ).first()
-    if note is None:
-        raise HTTPException(status_code=404,detail="Note not found")
-    return note
+@app.get("/rooms/{room_id}/notes",response_model=list[schemas.NoteResponse])
+def get_note(room_id:int,db:Session=Depends(get_db)):
+    notes=db.query(models.Notes).filter(
+        models.Notes.room_id==room_id
+    ).all()
+    return notes
