@@ -40,3 +40,11 @@ class Friendship(Base):
     user_id = Column(Integer, ForeignKey("users.id"))
     friend_id = Column(Integer, ForeignKey("users.id"))
     created_at = Column(DateTime, server_default=func.now())
+
+class Notes(Base):
+    __tablename__="notes"
+    id=Column(Integer,primary_key=True,index=True)
+    user_id=Column(Integer,ForeignKey("users.id"))
+    room_id=Column(Integer,ForeignKey("study_rooms.id"))
+    content=Column(String,nullable=False)
+    created_at=Column(DateTime,server_default=func.now())

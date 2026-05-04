@@ -153,3 +153,26 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
         raise HTTPException(status_code=401,detail="Invalid Credentials")
     access_token=create_access_token(data={"sub":user.username})
     return {"access_token":access_token,"token_type":"bearer"}
+
+
+@app.post("/rooms/{room_id}/notes",response_model=schemas.NoteResponse)
+def create_note(room_id:int,note: schemas.NoteCreate,current_user: models.User = Depends(get_current_user),db:Session=Depends(get_db)):
+    note=models.Notes(
+        user_id=current_user.id,
+        content=note.content, 
+        room_id=room_id
+    )
+    db.add(note)
+    db.commit()
+    db.refresh(note)
+    return note
+
+@app.get("/rooms/{room_id}/notes",response_model=schemas.NoteResponse)
+def get_note(room_id:int,current_user: models.User = Depends(get_current_user),db:Session=Depends(get_db)):
+    note=db.query(models.Notes).filter(
+        models.Notes.room_id==room_id,
+        models.Notes.user_id==current_user.id
+    ).first()
+    if note is None:
+        raise HTTPException(status_code=404,detail="Note not found")
+    return note

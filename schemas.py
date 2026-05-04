@@ -12,7 +12,7 @@ class UserResponse(BaseModel):
     username: str
     email: EmailStr
     
-    class config:
+    class Config:
         from_attributes =True
 
 class StudyRoomCreate(BaseModel):
@@ -33,7 +33,7 @@ class RoomMemberResponse(BaseModel):
     user_id:int
     room_id:int
 
-    class config:
+    class Config:
         from_attributes=True
 
 class StudySessionCreate(BaseModel):
@@ -54,6 +54,20 @@ class FriendshipResponse(BaseModel):
     id:int
     user_id:int
     friend_id:int
+
+    class Config:
+        from_attributes =True
+
+class NoteCreate(BaseModel):
+    content: str
+
+
+class NoteResponse(BaseModel):
+    id:int
+    user_id: int
+    content: str
+    room_id:int
+    created_at: datetime
 
     class Config:
         from_attributes =True
