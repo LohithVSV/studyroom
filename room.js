@@ -46,3 +46,36 @@ fetch("https://studyroom-api-vcns.onrender.com/rooms/" + roomId + "/members")
     let text = count === 1 ? "member" : "members"
     document.getElementById("memberCount").innerText = "👥 " + count + " " + text
 })
+
+fetch("https://studyroom-api-vcns.onrender.com/rooms/" + roomId + "/notes")
+.then(res => res.json())
+.then(function(data) {
+    let notesList=document.getElementById("notesList")
+    for(let note of data){
+        let noteElement=document.createElement("div")
+        noteElement.innerText=note.content
+        notesList.appendChild(noteElement)
+    }
+})   
+
+document.getElementById("addNoteBtn").addEventListener("click",function(){
+    let noteContent=document.getElementById("noteInput").value
+    fetch("https://studyroom-api-vcns.onrender.com/rooms/" + roomId + "/notes", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        },
+        body: JSON.stringify({ content: noteContent })
+    })
+    .then(res => res.json())
+    .then(data => {
+        let notesList = document.getElementById("notesList")
+        let noteElement = document.createElement("div")
+        noteElement.innerText = data.content
+        notesList.appendChild(noteElement)
+        document.getElementById("noteInput").value = ""
+    })
+})
+
+
