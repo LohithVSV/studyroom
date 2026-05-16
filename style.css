@@ -157,6 +157,7 @@ main {
     border-radius: 4px;
     box-shadow: 3px 3px 8px rgba(0,0,0,0.15);
     min-height: 120px;
+    align-self: start;
 }
 
 .note-input-area {
