@@ -33,7 +33,7 @@ document.getElementById("browseroombtn").addEventListener("click",function(){
     })
 })
 document.getElementById("createroombtn").addEventListener("click",function(){
-    document.getElementById("createroommodal").style.display="block";
+    document.getElementById("createroommodal").style.display="flex";
 })
 document.getElementById("submitroombtn").addEventListener("click",function(){
     let roomtitle=document.getElementById("roomtitle").value

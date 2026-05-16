@@ -233,6 +233,7 @@ main {
     border: 1px solid #c0d8f0;
     border-radius: 12px;
     padding: 30px;
+    width: 100%;
     max-width: 400px;
     margin: 20px auto;
     box-shadow: 0 4px 20px rgba(74, 158, 206, 0.2);
