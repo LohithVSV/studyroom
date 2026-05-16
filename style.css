@@ -172,3 +172,9 @@ main {
     max-width: 90%;
     padding: 20px;
 }
+
+.note-input-area textarea {
+    max-width: 400px;
+    height: 60px;
+    resize: none;
+}
