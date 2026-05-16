@@ -74,18 +74,21 @@ main {
 }
 
 #roomsContainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    columns: 3;
     gap: 20px;
 }
 
 #roomsContainer div {
+    break-inside: avoid;
+    margin-bottom: 20px;
+    display: inline-block;
+    width: 100%;
     background-color: #ffffff;
     border: 1px solid #c0d8f0;
     border-radius: 8px;
     padding: 20px;
-    transition: border-color 0.3s;
     box-shadow: 0 2px 8px rgba(74, 158, 206, 0.1);
+    transition: border-color 0.3s;
 }
 
 #roomsContainer div:hover {
@@ -109,6 +112,7 @@ main {
     z-index: -1;
     opacity: 0.3;
 }
+
 .auth-container {
     display: flex;
     justify-content: center;
@@ -261,6 +265,10 @@ main {
 @media (max-width: 600px) {
     .notes-grid {
         columns: 2;
+    }
+
+    #roomsContainer {
+        columns: 1;
     }
 
     .note-input-area {
