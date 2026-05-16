@@ -52,9 +52,14 @@ fetch("https://studyroom-api-2.onrender.com/rooms/" + roomId + "/notes")
 .then(function(data) {
     let notesList=document.getElementById("notesList")
     for(let note of data){
-        let noteElement=document.createElement("div")
-        noteElement.innerText=note.content
-        notesList.appendChild(noteElement)
+        let noteElement = document.createElement("div")
+noteElement.className = "sticky-note"
+noteElement.style.backgroundColor = randomColor()
+noteElement.innerHTML = `
+    <p>${note.content}</p>
+    <span class="note-author">~ ${note.username ?? "anon"}</span>
+`
+notesList.appendChild(noteElement)
     }
 })   
 
@@ -70,12 +75,19 @@ document.getElementById("addNoteBtn").addEventListener("click",function(){
     })
     .then(res => res.json())
     .then(data => {
-        let notesList = document.getElementById("notesList")
         let noteElement = document.createElement("div")
-        noteElement.innerText = data.content
+        noteElement.className = "sticky-note"
+        noteElement.style.backgroundColor = randomColor()
+        noteElement.innerHTML = `
+        <p>${data.content}</p>
+        <span class="note-author">~ ${data.username ?? "anon"}</span>`                                    
+        let notesList = document.getElementById("notesList")
         notesList.appendChild(noteElement)
-        document.getElementById("noteInput").value = ""
     })
 })
 
+let colors = ["#fff281", "#76c3f9", "#93f69b", "#78f7ea", "#f7c0ff", "#ffe0b2"]
 
+function randomColor() {
+    return colors[Math.floor(Math.random() * colors.length)]
+}

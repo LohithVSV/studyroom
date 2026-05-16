@@ -144,3 +144,17 @@ main {
     padding: 12px;
     font-size: 16px;
 }
+
+.notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.sticky-note {
+    padding: 1rem;
+    border-radius: 4px;
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.15);
+    min-height: 120px;
+}
