@@ -181,3 +181,49 @@ main {
     height: 60px;
     resize: none;
 }
+
+#heroSection {
+    display: flex;
+    justify-content: center;
+    padding: 60px 20px 20px;
+}
+
+.hero-box {
+    text-align: center;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.hero-box h2 {
+    font-size: 28px;
+}
+
+.hero-box p {
+    color: #4a7a9b;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.hero-features {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.hero-features span {
+    background: #ffffff;
+    border: 1px solid #c0d8f0;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    box-shadow: 0 2px 8px rgba(74,158,206,0.1);
+}
+
+.created-by {
+    font-size: 13px;
+    color: #8aaabb;
+    margin-top: 10px;
+}
