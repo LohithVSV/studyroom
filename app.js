@@ -1,6 +1,6 @@
 console.log("app.js loaded")
 function joinRoom(roomId) {
-    fetch("https://studyroom-api-vcns.onrender.com/rooms/" + roomId + "/join", {
+    fetch("https://studyroom-api-2.onrender.com/rooms/" + roomId + "/join", {
         method: "POST",
         headers: {
             "Authorization": "Bearer " + localStorage.getItem("token")
@@ -15,7 +15,7 @@ function joinRoom(roomId) {
 document.getElementById("browseroombtn").addEventListener("click",function(){
     document.getElementById("browseroombtn").style.display = "none"
     document.getElementById("roomsSection").style.display = "block";
-    fetch("https://studyroom-api-vcns.onrender.com/rooms")
+    fetch("https://studyroom-api-2.onrender.com/rooms")
     .then(function(response){
         return response.json()
     })
@@ -38,7 +38,7 @@ document.getElementById("createroombtn").addEventListener("click",function(){
 document.getElementById("submitroombtn").addEventListener("click",function(){
     let roomtitle=document.getElementById("roomtitle").value
     let roomdescription=document.getElementById("roomdescription").value
-        fetch("https://studyroom-api-vcns.onrender.com/rooms",{
+        fetch("https://studyroom-api-2.onrender.com/rooms",{
         method:"POST",
         headers:{ "Content-Type": "application/json",
             "Authorization": "Bearer " + localStorage.getItem("token") 

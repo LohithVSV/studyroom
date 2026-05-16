@@ -2,7 +2,7 @@ let params = new URLSearchParams(window.location.search)
 let roomId = params.get("id")
 console.log(roomId)
 
-fetch("https://studyroom-api-vcns.onrender.com/rooms/" + roomId)
+fetch("https://studyroom-api-2.onrender.com/rooms/" + roomId)
 .then(res =>res.json())
 .then(data => {
     console.log(data)
@@ -39,7 +39,7 @@ document.getElementById("leaveBtn").addEventListener("click", function() {
     window.location.href = "index.html"
 })
 
-fetch("https://studyroom-api-vcns.onrender.com/rooms/" + roomId + "/members")
+fetch("https://studyroom-api-2.onrender.com/rooms/" + roomId + "/members")
 .then(res => res.json())
 .then(data => {
     let count = data.member_count
@@ -47,7 +47,7 @@ fetch("https://studyroom-api-vcns.onrender.com/rooms/" + roomId + "/members")
     document.getElementById("memberCount").innerText = "👥 " + count + " " + text
 })
 
-fetch("https://studyroom-api-vcns.onrender.com/rooms/" + roomId + "/notes")
+fetch("https://studyroom-api-2.onrender.com/rooms/" + roomId + "/notes")
 .then(res => res.json())
 .then(function(data) {
     let notesList=document.getElementById("notesList")
@@ -60,7 +60,7 @@ fetch("https://studyroom-api-vcns.onrender.com/rooms/" + roomId + "/notes")
 
 document.getElementById("addNoteBtn").addEventListener("click",function(){
     let noteContent=document.getElementById("noteInput").value
-    fetch("https://studyroom-api-vcns.onrender.com/rooms/" + roomId + "/notes", {
+    fetch("https://studyroom-api-2.onrender.com/rooms/" + roomId + "/notes", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

@@ -4,7 +4,7 @@ document.getElementById("signupform").addEventListener("submit", function(event)
     let password = document.getElementById("password").value
     let email = document.getElementById("email").value
 
-    fetch("https://studyroom-api-vcns.onrender.com/users", {
+    fetch("https://studyroom-api-2.onrender.com/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username: username, email: email, password: password })
