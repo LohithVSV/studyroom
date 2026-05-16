@@ -257,3 +257,23 @@ main {
     padding: 12px;
     font-size: 15px;
 }
+
+@media (max-width: 600px) {
+    .notes-grid {
+        columns: 2;
+    }
+
+    .note-input-area {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .note-input-area textarea {
+        width: 90%;
+        max-width: 100%;
+    }
+
+    .note-input-area button {
+        width: 90%;
+    }
+}
