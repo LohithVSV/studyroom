@@ -157,15 +157,15 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
 
 @app.post("/rooms/{room_id}/notes",response_model=schemas.NoteResponse)
 def create_note(room_id:int,note: schemas.NoteCreate,current_user: models.User = Depends(get_current_user),db:Session=Depends(get_db)):
-    note=models.Notes(
+    db_note=models.Notes(
         user_id=current_user.id,
         content=note.content, 
         room_id=room_id
     )
-    db.add(note)
+    db.add(db_note)
     db.commit()
-    db.refresh(note)
-    return note
+    db.refresh(db_note)
+    return db_note
 
 @app.get("/rooms/{room_id}/notes",response_model=list[schemas.NoteResponse])
 def get_note(room_id:int,db:Session=Depends(get_db)):
