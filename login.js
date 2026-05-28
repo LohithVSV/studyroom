@@ -11,8 +11,12 @@ document.getElementById("loginform").addEventListener("submit",function(event){
 })
 .then(res => res.json())
 .then(data => {
-    console.log(data)
-    localStorage.setItem("token", data.access_token)
-    window.location.href = "index.html"
+    if (data.access_token) {
+        console.log(data)
+        localStorage.setItem("token", data.access_token)
+        window.location.href = "index.html"
+    } else {
+        document.getElementById("errorMsg").textContent = data.detail;
+    }
 })
 })

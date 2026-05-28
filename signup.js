@@ -11,7 +11,11 @@ document.getElementById("signupform").addEventListener("submit", function(event)
     })
     .then(res => res.json())
     .then(data => {
-        window.location.href = "login.html"
+        if (data.detail) {
+            document.getElementById("errorMsg").textContent = data.detail;
+        } else {
+            window.location.href = "login.html"
+        }
     })
 
 })
