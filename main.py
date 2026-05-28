@@ -1,5 +1,6 @@
 from fastapi import FastAPI,Depends,HTTPException    
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import IntegrityError
 from database import get_db
 import models,schemas
 from auth import hash_password,verify_password
@@ -32,7 +33,7 @@ def get_current_user(token:str=Depends(oauth2_scheme),db:Session=Depends(get_db)
         raise HTTPException(status_code=401,detail="User not found")
     return user
 
-@app.post("/users",response_model=schemas.UserCreate)
+@app.post("/users", response_model=schemas.UserResponse)
 def create_user(user:schemas.UserCreate,db:Session=Depends(get_db)):
     db_user=models.User(
         username=user.username,
@@ -40,7 +41,11 @@ def create_user(user:schemas.UserCreate,db:Session=Depends(get_db)):
         password=hash_password(user.password)
     )
     db.add(db_user)
-    db.commit()
+    try:
+        db.commit()
+    except IntegrityError:
+        db.rollback()
+        raise HTTPException(status_code=400, detail="Username or email already exists")
     db.refresh(db_user)
     return db_user
 

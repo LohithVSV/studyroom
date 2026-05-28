@@ -9,13 +9,26 @@ document.getElementById("signupform").addEventListener("submit", function(event)
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username: username, email: email, password: password })
     })
-    .then(res => res.json())
+    .then(res => {
+        return res.json().then(data => {
+            if (!res.ok) throw data;
+            return data;
+        });
+    })
     .then(data => {
         if (data.detail) {
-            document.getElementById("errorMsg").textContent = data.detail;
+            const message = data.detail.includes("exists")
+                ? "Invalid inputs: maybe username or email already exists"
+                : data.detail;
+            document.getElementById("errorMsg").textContent = message;
         } else {
             window.location.href = "login.html"
         }
     })
+    .catch(error => {
+        console.error("Signup error:", error);
+        const message = error?.detail || error?.message || "Signup failed. Please try again.";
+        document.getElementById("errorMsg").textContent = message;
+    });
 
-})
+});
