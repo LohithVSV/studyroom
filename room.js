@@ -1,10 +1,11 @@
 let params = new URLSearchParams(window.location.search)
 let roomId = params.get("id")
 console.log(roomId)
-
+startProgress();
 fetch("https://studyroom-api-2.onrender.com/rooms/" + roomId)
 .then(res =>res.json())
 .then(data => {
+    stopProgress();
     console.log(data)
     document.getElementById("roomTitle").innerText = data.title
 })
@@ -38,7 +39,6 @@ document.getElementById("startBtn").addEventListener("click", function() {
 document.getElementById("leaveBtn").addEventListener("click", function() {
     window.location.href = "index.html"
 })
-
 fetch("https://studyroom-api-2.onrender.com/rooms/" + roomId + "/members")
 .then(res => res.json())
 .then(data => {
@@ -46,7 +46,6 @@ fetch("https://studyroom-api-2.onrender.com/rooms/" + roomId + "/members")
     let text = count === 1 ? "member" : "members"
     document.getElementById("memberCount").innerText = "👥 " + count + " " + text
 })
-
 fetch("https://studyroom-api-2.onrender.com/rooms/" + roomId + "/notes")
 .then(res => res.json())
 .then(function(data) {
@@ -65,6 +64,7 @@ notesList.appendChild(noteElement)
 
 document.getElementById("addNoteBtn").addEventListener("click",function(){
     let noteContent=document.getElementById("noteInput").value
+    startProgress();
     fetch("https://studyroom-api-2.onrender.com/rooms/" + roomId + "/notes", {
         method: "POST",
         headers: {
@@ -75,6 +75,7 @@ document.getElementById("addNoteBtn").addEventListener("click",function(){
     })
     .then(res => res.json())
     .then(data => {
+        stopProgress();
         let noteElement = document.createElement("div")
         noteElement.className = "sticky-note"
         noteElement.style.backgroundColor = randomColor()

@@ -285,3 +285,15 @@ main {
         width: 90%;
     }
 }
+
+#progressbar {
+    position:fixed;
+    top:0;
+    left:0;
+    width:0%;
+    height:5px;
+    background-color:#4a9ece;
+    z-index:1000;
+    display:none;
+    transition: width 0.4s ease;
+}

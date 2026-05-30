@@ -3,7 +3,7 @@ document.getElementById("loginform").addEventListener("submit",function(event){
     console.log("submitted")
     let username = document.getElementById("username").value
     let password = document.getElementById("password").value
-
+    startProgress();
     fetch("https://studyroom-api-2.onrender.com/login", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -11,6 +11,7 @@ document.getElementById("loginform").addEventListener("submit",function(event){
 })
 .then(res => res.json())
 .then(data => {
+    stopProgress();
     if (data.access_token) {
         console.log(data)
         localStorage.setItem("token", data.access_token)

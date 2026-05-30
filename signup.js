@@ -3,7 +3,7 @@ document.getElementById("signupform").addEventListener("submit", function(event)
     let username = document.getElementById("username").value
     let password = document.getElementById("password").value
     let email = document.getElementById("email").value
-
+    startProgress();
     fetch("https://studyroom-api-2.onrender.com/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -16,6 +16,7 @@ document.getElementById("signupform").addEventListener("submit", function(event)
         });
     })
     .then(data => {
+        stopProgress();
         if (data.detail) {
             const message = data.detail.includes("exists")
                 ? "Invalid inputs: maybe username or email already exists"
@@ -26,6 +27,7 @@ document.getElementById("signupform").addEventListener("submit", function(event)
         }
     })
     .catch(error => {
+        stopProgress();
         console.error("Signup error:", error);
         const message = error?.detail || error?.message || "Signup failed. Please try again.";
         document.getElementById("errorMsg").textContent = message;

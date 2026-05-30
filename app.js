@@ -1,5 +1,6 @@
 console.log("app.js loaded")
 function joinRoom(roomId) {
+    startProgress();
     fetch("https://studyroom-api-2.onrender.com/rooms/" + roomId + "/join", {
         method: "POST",
         headers: {
@@ -8,6 +9,7 @@ function joinRoom(roomId) {
     })
     .then(res => res.json())
     .then(data => {
+        stopProgress();
         console.log(data)
         window.location.href = "room.html?id=" + roomId
     })
@@ -15,11 +17,13 @@ function joinRoom(roomId) {
 document.getElementById("browseroombtn").addEventListener("click",function(){
     document.getElementById("browseroombtn").style.display = "none"
     document.getElementById("roomsSection").style.display = "block";
+    startProgress();
     fetch("https://studyroom-api-2.onrender.com/rooms")
     .then(function(response){
         return response.json()
     })
     .then(function(data){
+        stopProgress();
         document.getElementById("roomsContainer").innerHTML = ""
         for (let room of data) {
         let card = document.createElement("div")
@@ -38,6 +42,7 @@ document.getElementById("createroombtn").addEventListener("click",function(){
 document.getElementById("submitroombtn").addEventListener("click",function(){
     let roomtitle=document.getElementById("roomtitle").value
     let roomdescription=document.getElementById("roomdescription").value
+    startProgress();
         fetch("https://studyroom-api-2.onrender.com/rooms",{
         method:"POST",
         headers:{ "Content-Type": "application/json",
@@ -47,6 +52,7 @@ document.getElementById("submitroombtn").addEventListener("click",function(){
     })
     .then(res => res.json())
     .then(data => {
+        stopProgress();
         window.location.href = "index.html"
     })
     })
